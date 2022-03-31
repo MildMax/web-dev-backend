@@ -4,6 +4,9 @@ let tuits = posts;
 const createTuit = (req, res) => {
     const newTuit = req.body;
     newTuit._id = (new Date()).getTime()+'';
+    if (!newTuit.stats) {
+        newTuit.stats = {};
+    }
     newTuit.stats.likes = 0;
     tuits = [newTuit, ...tuits]
     res.json(newTuit);
