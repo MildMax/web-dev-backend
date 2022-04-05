@@ -2,7 +2,6 @@ import * as tuitsDao from "../database/tuits/tuits-dao.js";
 
 const createTuit = async (req, res) => {
     const tuitBody = req.body;
-    console.log(tuitBody)
     // required values to meet prior spec requirements
     let newTuit = {
         topic: "Web Development",
