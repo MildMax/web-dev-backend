@@ -3,8 +3,9 @@ let tuits = posts;
 
 const createTuit = (req, res) => {
     const tuitBody = req.body;
+    console.log(tuitBody)
     // required values to meet prior spec requirements
-    const newTuit = {
+    let newTuit = {
         topic: "Web Development",
             postedBy: {
         username: "ReactJS"
@@ -30,7 +31,10 @@ const createTuit = (req, res) => {
     // generate id
     newTuit._id = (new Date()).getTime()+'';
     // place tuit text into tuit
-    newTuit.tuit = tuitBody.tuit;
+    newTuit = {
+        ...newTuit,
+        ...tuitBody
+    }
     tuits = [newTuit, ...tuits]
     res.json(newTuit);
 }
