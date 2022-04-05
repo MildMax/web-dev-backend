@@ -2,8 +2,9 @@ import * as tuitsDao from "../database/tuits/tuits-dao.js";
 
 const createTuit = async (req, res) => {
     const tuitBody = req.body;
+    console.log(tuitBody)
     // required values to meet prior spec requirements
-    const newTuit = {
+    let newTuit = {
         topic: "Web Development",
             postedBy: {
         username: "ReactJS"
@@ -29,7 +30,10 @@ const createTuit = async (req, res) => {
     // generate id
     newTuit._id = (new Date()).getTime()+'';
     // place tuit text into tuit
-    newTuit.tuit = tuitBody.tuit;
+    newTuit = {
+        ...newTuit,
+        ...tuitBody
+    }
     const insertedTuit = await tuitsDao.createTuit(newTuit);
     res.json(insertedTuit);
 }
