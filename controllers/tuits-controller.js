@@ -27,8 +27,6 @@ const createTuit = async (req, res) => {
         },
     }
     // new vals
-    // generate id
-    newTuit._id = (new Date()).getTime()+'';
     // place tuit text into tuit
     newTuit = {
         ...newTuit,
