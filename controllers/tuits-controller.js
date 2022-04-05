@@ -3,7 +3,6 @@ let tuits = posts;
 
 const createTuit = (req, res) => {
     const tuitBody = req.body;
-    console.log(tuitBody)
     // required values to meet prior spec requirements
     let newTuit = {
         topic: "Web Development",
