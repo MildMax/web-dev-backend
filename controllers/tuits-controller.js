@@ -2,12 +2,35 @@ import posts from "./tuits/tuits.js";
 let tuits = posts;
 
 const createTuit = (req, res) => {
-    const newTuit = req.body;
-    newTuit._id = (new Date()).getTime()+'';
-    if (!newTuit.stats) {
-        newTuit.stats = {};
+    const tuitBody = req.body;
+    // required values to meet prior spec requirements
+    const newTuit = {
+        topic: "Web Development",
+            postedBy: {
+        username: "ReactJS"
+        },
+        liked: false,
+            disliked: false,
+        verified: false,
+        handle: "ReactJS",
+        time: "2h",
+        tuit: "",
+        avatarImage: "/images/doom-guy-alt.png",
+        attachments: {
+        image: "/images/doom_banner_alt.jpg"
+        },
+        stats: {
+            comments: 0,
+                retuits: 0,
+                likes: 0,
+                dislikes: 0
+        },
     }
-    newTuit.stats.likes = 0;
+    // new vals
+    // generate id
+    newTuit._id = (new Date()).getTime()+'';
+    // place tuit text into tuit
+    newTuit.tuit = tuitBody.tuit;
     tuits = [newTuit, ...tuits]
     res.json(newTuit);
 }
