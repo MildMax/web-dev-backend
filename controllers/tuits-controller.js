@@ -1,10 +1,35 @@
 import * as tuitsDao from "../database/tuits/tuits-dao.js";
 
 const createTuit = async (req, res) => {
-    const newTuit = req.body;
-    if (!newTuit.stats) {
-        newTuit.stats = {};
+    const tuitBody = req.body;
+    // required values to meet prior spec requirements
+    const newTuit = {
+        topic: "Web Development",
+            postedBy: {
+        username: "ReactJS"
+        },
+        liked: false,
+            disliked: false,
+        verified: false,
+        handle: "ReactJS",
+        time: "2h",
+        tuit: "",
+        avatarImage: "/images/doom-guy-alt.png",
+        attachments: {
+        image: "/images/doom_banner_alt.jpg"
+        },
+        stats: {
+            comments: 0,
+                retuits: 0,
+                likes: 0,
+                dislikes: 0
+        },
     }
+    // new vals
+    // generate id
+    newTuit._id = (new Date()).getTime()+'';
+    // place tuit text into tuit
+    newTuit.tuit = tuitBody.tuit;
     const insertedTuit = await tuitsDao.createTuit(newTuit);
     res.json(insertedTuit);
 }
