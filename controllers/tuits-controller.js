@@ -5,7 +5,6 @@ const createTuit = async (req, res) => {
     if (!newTuit.stats) {
         newTuit.stats = {};
     }
-    console.log(newTuit)
     const insertedTuit = await tuitsDao.createTuit(newTuit);
     res.json(insertedTuit);
 }
