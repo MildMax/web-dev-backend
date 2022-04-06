@@ -11,6 +11,7 @@ const schema = mongoose.Schema({
     handle: String,
     time: String,
     tuit: String,
+    timePosted: Number,
     avatarImage: String,
     attachments: {
         image: String,
