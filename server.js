@@ -4,7 +4,11 @@ import mongoose from 'mongoose';
 import helloController from "./controllers/hello-controller.js";
 import userController from "./controllers/user-controller.js";
 import tuitsController from "./controllers/tuits-controller.js";
-mongoose.connect('mongodb://localhost:27017/webdev');
+
+const username = process.env.MONGO_USER;
+const password = process.env.MONGO_PW;
+
+mongoose.connect(`mongodb+srv://${username}:${password}@cluster0.daxtl.mongodb.net/myFirstDatabase?retryWrites=true&w=majority`);
 
 const app = express();
 app.use(cors());

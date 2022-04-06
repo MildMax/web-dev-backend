@@ -1,5 +1,4 @@
 import * as tuitsDao from "../database/tuits/tuits-dao.js";
-import posts from "./tuits/tuits.js";
 
 const createTuit = async (req, res) => {
     const tuitBody = req.body;
@@ -15,6 +14,7 @@ const createTuit = async (req, res) => {
         handle: "ReactJS",
         time: "2h",
         tuit: "",
+        timePosted: (new Date()).getTime(),
         avatarImage: "/images/doom-guy-alt.png",
         attachments: {
         image: "/images/doom_banner_alt.jpg"
@@ -31,7 +31,6 @@ const createTuit = async (req, res) => {
     newTuit = {
         ...newTuit,
         ...tuitBody,
-        timePosted: (new Date()).getTime()
     }
     const insertedTuit = await tuitsDao.createTuit(newTuit);
     res.json(insertedTuit);
@@ -55,19 +54,9 @@ const deleteTuit = async (req, res) => {
     res.send(status);
 }
 
-const populateDB = async (req, res) => {
-    for (const post of posts.reverse()) {
-        post.timePosted = (new Date()).getTime();
-        console.log(post)
-        await tuitsDao.createTuit(post);
-    }
-    res.sendStatus(200);
-}
-
 export default (app) => {
     app.post('/api/tuits', createTuit);
     app.get('/api/tuits', findAllTuits);
     app.put('/api/tuits/:tid', updateTuit);
     app.delete('/api/tuits/:tid', deleteTuit);
-    app.get('/api/tuits/populate', populateDB);
 }
