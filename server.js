@@ -5,10 +5,9 @@ import helloController from "./controllers/hello-controller.js";
 import userController from "./controllers/user-controller.js";
 import tuitsController from "./controllers/tuits-controller.js";
 
-const username = process.env.MONGO_USER;
-const password = process.env.MONGO_PW;
+const CONNECTION_STRING = process.env.DB_CONNECTION_STRING || 'mongodb://localhost:27017/webdev';
 
-mongoose.connect(`mongodb+srv://${username}:${password}@cluster0.daxtl.mongodb.net/myFirstDatabase?retryWrites=true&w=majority`);
+mongoose.connect(CONNECTION_STRING);
 
 const app = express();
 app.use(cors());
